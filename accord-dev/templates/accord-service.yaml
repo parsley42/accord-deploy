@@ -67,6 +67,10 @@ spec:
       labels:
         app: accord-service
     spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       containers:
       - image: "{{ .Values.images.accord_service.repository }}:{{ .Values.images.accord_service.tag }}"
         name: accord-service

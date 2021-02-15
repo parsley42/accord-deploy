@@ -25,6 +25,8 @@ spec:
         volumes:
           mongo:
             size: "5Gi"
+        imagePullSecrets:
+        - ljreg
         ingress:
           annotations:
             nginx.ingress.kubernetes.io/auth-tls-secret: admin/linuxjedi-ca-cert

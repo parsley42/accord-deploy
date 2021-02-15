@@ -29,6 +29,8 @@ images:
     repository: "docker.io/envoyproxy/envoy"
     tag: "v1.16-latest"
 
+imagePullSecrets: []
+
 # Class for PVCs
 volumeClass: "longhorn"
 
