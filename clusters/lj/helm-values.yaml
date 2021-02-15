@@ -3,8 +3,12 @@ envUrl: "accord-dev"
 volumes:
   mongo:
     size: "5Gi"
+images:
+  accord_service:
+    repository: "registry.in.linuxjedi.org/accord/accord-service"
+    tag: "latest"
 imagePullSecrets:
-- ljreg
+- name: ljreg
 ingress:
   annotations:
     nginx.ingress.kubernetes.io/auth-tls-secret: admin/linuxjedi-ca-cert
