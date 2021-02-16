@@ -77,6 +77,17 @@ spec:
         imagePullPolicy: "{{ .Values.images.accord_service.pullPolicy }}"
         command:
         - /usr/bin/supervisord
+        env:
+        - name: MONGO_USER
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secrets
+              key: MONGO_USER
+        - name: MONGO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongo-secrets
+              key: MONGO_PASSWORD
         envFrom:
         - configMapRef:
             name: accord-service-configmap
