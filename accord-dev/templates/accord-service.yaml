@@ -88,6 +88,10 @@ spec:
             secretKeyRef:
               name: mongo-secrets
               key: MONGO_PASSWORD
+        - name: APP_DOMAIN
+          value: {{ .Values.appDomain }}
+        - name: APP_URL
+          value: {{ .Values.envUrl }}
         envFrom:
         - configMapRef:
             name: accord-service-configmap
