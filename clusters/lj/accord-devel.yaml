@@ -46,6 +46,42 @@ spec:
               headers:
                 name: "ssl-client-subject-dn"
                 prefix_match: "CN=<SHORTUSER>,"
+        accordServiceHeaderMap: |
+          uwsgi_param eppn $HTTP_EPPN;
+          uwsgi_param sn $HTTP_SN;
+          uwsgi_param givenName $HTTP_GIVENNAME;
+          uwsgi_param displayName $HTTP_DISPLAYNAME;
+          uwsgi_param cn $ssl-client-subject-dn;
+          uwsgi_param affiliation $HTTP_UNSCOPED_AFFILIATION;
+          uwsgi_param uid $HTTP_UID;
+          uwsgi_param gid $HTTP_GID;
+          uwsgi_param email $HTTP_EPPN;
+          uwsgi_param title $HTTP_TITLE;
+          uwsgi_param entitlement $HTTP_ENTITLEMENT;
+          uwsgi_param targetedID $HTTP_TARGETED_ID;
+          uwsgi_param persistentID $HTTP_PERSISTENT_ID;
+          uwsgi_param isMemberOf $HTTP_ISMEMBEROF;
+          uwsgi_param telephoneNumber $HTTP_TELEPHONENUMBER;
+          uwsgi_param initials $HTTP_INITIALS;
+          uwsgi_param description $HTTP_DESCRIPTION;
+          uwsgi_param carLicense $HTTP_CARLICENSE;
+          uwsgi_param departmentNumber $HTTP_DEPARTMENTNUMBER;
+          uwsgi_param employeeNumber $HTTP_EMPLOYEENUMBER;
+          uwsgi_param employeeType $HTTP_EMPLOYEETYPE;
+          uwsgi_param preferencialLanguage $HTTP_PREFERREDLANGUAGE;
+          uwsgi_param manager $HTTP_MANAGER;
+          uwsgi_param seealSO $HTTP_SEEALSO;
+          uwsgi_param fax $HTTP_FACSIMILETELEPHONENUMBER;
+          uwsgi_param street $HTTP_STREET;
+          uwsgi_param pobox $HTTP_POSTOFFICEBOX;
+          uwsgi_param pc $HTTP_POSTALCODE;
+          uwsgi_param st $HTTP_ST;
+          uwsgi_param l $HTTP_L;
+          uwsgi_param o $HTTP_O;
+          uwsgi_param ou $HTTP_OU;
+          uwsgi_param businessCategory $HTTP_BUSINESSCATEGORY;
+          uwsgi_param physicalDeliveryOfficeName $HTTP_PHYSICALDELIVERYOFFICENAME;
+
   syncPolicy:
     automated:
       prune: true
