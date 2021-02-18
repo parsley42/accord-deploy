@@ -17,7 +17,7 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: accord-service-connections-json
+  name: accord-service-config
   namespace: {{ .Release.Namespace }}
 data:
   connections.json: |
@@ -46,6 +46,24 @@ data:
         "PORT": "",
         "CLIENT_ID": "",
         "CLIENT_SECRET": ""
+      }
+    }
+  nginx.conf: |
+    server {
+      listen 0.0.0.0:5000;
+      server_name localhost;
+
+      # max upload size
+      client_max_body_size 75M;
+
+      # underscores_in_headers on;
+
+      location / {
+        include uwsgi_params;
+        {{- with .Values.accordServiceHeaderMap }}
+        {{- . | nindent 8 }}
+        {{- end }}
+        uwsgi_pass unix:///accord_service/app.sock;
       }
     }
 ---
@@ -96,12 +114,24 @@ spec:
         - configMapRef:
             name: accord-service-configmap
         volumeMounts:
-        - name: accord-service-connections-json
+        - name: accord-service-config-service
           mountPath: /etc/private/accord
+        - name: accord-service-config-nginx
+          mountPath: /etc/nginx/sites-available
       volumes:
-      - name: accord-service-connections-json
+      - name: accord-service-config-service
         configMap:
-          name: accord-service-connections-json
+          name: accord-service-config
+          items:
+          - key: connections.json
+            path: connections.json
+      volumes:
+      - name: accord-service-config-nginx
+        configMap:
+          name: accord-service-config
+          items:
+          - key: nginx.conf
+            path: default
 ---
 # accord-service service
 apiVersion: v1
