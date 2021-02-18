@@ -125,7 +125,6 @@ spec:
           items:
           - key: connections.json
             path: connections.json
-      volumes:
       - name: accord-service-config-nginx
         configMap:
           name: accord-service-config
